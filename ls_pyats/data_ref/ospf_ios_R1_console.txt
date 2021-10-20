@@ -1,0 +1,566 @@
++++ R1 with alias 'vty': executing command 'show ip ospf' +++
+show ip ospf
+ Routing Process "ospf 1" with ID 10.0.0.1
+ Start time: 00:00:14.458, Time elapsed: 01:51:08.519
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ Supports Link-local Signaling (LLS)
+ Supports area transit capability
+ Supports NSSA (compatible with RFC 3101)
+ Supports Database Exchange Summary List Optimization (RFC 5243)
+ Event-log enabled, Maximum number of events: 1000, Mode: cyclic
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 5000 msecs
+ Minimum hold time between two consecutive SPFs 10000 msecs
+ Maximum wait time between two consecutive SPFs 10000 msecs
+ Incremental-SPF disabled
+ Minimum LSA interval 5 secs
+ Minimum LSA arrival 1000 msecs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ EXCHANGE/LOADING adjacency limit: initial 300, process maximum 300
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of opaque AS LSA 0. Checksum Sum 0x000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Number of areas transit capable is 0
+ External flood list length 0
+ IETF NSF helper support enabled
+ Cisco NSF helper support enabled
+ Reference bandwidth unit is 100 mbps
+ Prefix-suppression is enabled
+    Area BACKBONE(0)
+        Number of interfaces in this area is 3 (1 loopback)
+	Area has no authentication
+	SPF algorithm last executed 00:20:42.661 ago
+	SPF algorithm executed 4 times
+	Area ranges are
+	Number of LSA 6. Checksum Sum 0x021C58
+	Number of opaque link LSA 0. Checksum Sum 0x000000
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+R1#
++++ R1 with alias 'vty': executing command 'show ip protocols' +++
+show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is "application"
+  Sending updates every 0 seconds
+  Invalid after 0 seconds, hold down 0, flushed after 0
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Maximum path: 32
+  Routing for Networks:
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+  Distance: (default is 4)
+
+Routing Protocol is "ospf 1"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Router ID 10.0.0.1
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    10.0.0.0 0.255.255.255 area 0
+  Passive Interface(s):
+    Loopback0
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    10.0.0.2             110      01:50:53
+    10.0.0.3             110      01:50:53
+    10.0.0.6             110      01:27:48
+    10.0.0.4             110      01:50:53
+    10.0.0.5             110      00:20:42
+    203.0.113.61         110      01:50:53
+    198.51.100.51        110      01:50:53
+  Distance: (default is 110)
+
+Routing Protocol is "bgp 65000"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Route Reflector for address family IPv4 Unicast, 2 clients
+  IGP synchronization is disabled
+  Automatic route summarization is disabled
+  Neighbor(s):
+    Address          FiltIn FiltOut DistIn DistOut Weight RouteMap
+    10.0.0.5                                             
+    10.0.0.6                                             
+  Maximum path: 1
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    10.0.0.6             200      01:49:45
+    10.0.0.5             200      01:49:45
+  Distance: external 20 internal 200 local 200
+
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf mpls ldp interface' +++
+show ip ospf mpls ldp interface
+Loopback0
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+Ethernet0/1
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+Ethernet0/0
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf mpls traffic-eng link' +++
+show ip ospf mpls traffic-eng link
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+  Area 0 MPLS TE not initialized
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf database router' +++
+show ip ospf database router
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+		Router Link States (Area 0)
+
+  LS age: 604
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.1
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 80000006
+  Checksum: 0x998
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.1
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.3
+     (Link Data) Router Interface address: 10.1.3.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.4
+     (Link Data) Router Interface address: 10.1.4.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 636
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.2
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 80000005
+  Checksum: 0x6932
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.2
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.4
+     (Link Data) Router Interface address: 10.2.4.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.3
+     (Link Data) Router Interface address: 10.2.3.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1249
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.3
+  Advertising Router: 10.0.0.3
+  LS Seq Number: 80000007
+  Checksum: 0x140C
+  Length: 84
+  Number of Links: 5
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.3
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.6
+     (Link Data) Router Interface address: 10.3.6.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.5
+     (Link Data) Router Interface address: 10.3.5.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.1
+     (Link Data) Router Interface address: 10.1.3.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.2
+     (Link Data) Router Interface address: 10.2.3.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1249
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.4
+  Advertising Router: 10.0.0.4
+  LS Seq Number: 80000007
+  Checksum: 0x69AB
+  Length: 84
+  Number of Links: 5
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.4
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.5
+     (Link Data) Router Interface address: 10.4.5.4
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.6
+     (Link Data) Router Interface address: 10.4.6.4
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.2
+     (Link Data) Router Interface address: 10.2.4.4
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.1
+     (Link Data) Router Interface address: 10.1.4.4
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1250
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.5
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000006
+  Checksum: 0xCDB7
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.5
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.4
+     (Link Data) Router Interface address: 10.4.5.5
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.3
+     (Link Data) Router Interface address: 10.3.5.5
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1374
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.6
+  Advertising Router: 10.0.0.6
+  LS Seq Number: 80000006
+  Checksum: 0x5E20
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.6
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.3
+     (Link Data) Router Interface address: 10.3.6.6
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.4
+     (Link Data) Router Interface address: 10.4.6.6
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf database network' +++
+show ip ospf database network
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf database external' +++
+show ip ospf database external
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf database summary' +++
+show ip ospf database summary
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf database opaque-area' +++
+show ip ospf database opaque-area
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf virtual-links' +++
+show ip ospf virtual-links
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf interface' +++
+show ip ospf interface
+Loopback0 is up, line protocol is up 
+  Internet Address 10.0.0.1/32, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 10.0.0.1, Network Type LOOPBACK, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Loopback interface is treated as a stub Host
+Ethernet0/1 is up, line protocol is up 
+  Internet Address 10.1.3.1/24, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 10.0.0.1, Network Type POINT_TO_POINT, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Prefix-suppression is enabled
+  Transmit Delay is 1 sec, State POINT_TO_POINT
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:04
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.3
+  Suppress hello for 0 neighbor(s)
+Ethernet0/0 is up, line protocol is up 
+  Internet Address 10.1.4.1/24, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 10.0.0.1, Network Type POINT_TO_POINT, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Prefix-suppression is enabled
+  Transmit Delay is 1 sec, State POINT_TO_POINT
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:01
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Index 1/1/1, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.4
+  Suppress hello for 0 neighbor(s)
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf neighbor detail' +++
+show ip ospf neighbor detail
+ Neighbor 10.0.0.3, interface address 10.1.3.3
+    In the area 0 via interface Ethernet0/1
+    Neighbor priority is 0, State is FULL, 6 state changes
+    DR is 0.0.0.0 BDR is 0.0.0.0
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:38
+    Neighbor is up for 01:51:03
+    Index 1/1/1, retransmission queue length 0, number of retransmission 1
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 1, maximum is 1
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+ Neighbor 10.0.0.4, interface address 10.1.4.4
+    In the area 0 via interface Ethernet0/0
+    Neighbor priority is 0, State is FULL, 6 state changes
+    DR is 0.0.0.0 BDR is 0.0.0.0
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:36
+    Neighbor is up for 01:51:02
+    Index 1/2/2, retransmission queue length 0, number of retransmission 0
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf interface Ethernet0/1' +++
+show ip ospf interface Ethernet0/1
+Ethernet0/1 is up, line protocol is up 
+  Internet Address 10.1.3.1/24, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 10.0.0.1, Network Type POINT_TO_POINT, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Prefix-suppression is enabled
+  Transmit Delay is 1 sec, State POINT_TO_POINT
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:02
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.3
+  Suppress hello for 0 neighbor(s)
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf interface Ethernet0/0' +++
+show ip ospf interface Ethernet0/0
+Ethernet0/0 is up, line protocol is up 
+  Internet Address 10.1.4.1/24, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 10.0.0.1, Network Type POINT_TO_POINT, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Prefix-suppression is enabled
+  Transmit Delay is 1 sec, State POINT_TO_POINT
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:08
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Index 1/1/1, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.4
+  Suppress hello for 0 neighbor(s)
+R1#
++++ R1 with alias 'vty': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ router-id 10.0.0.1
+ prefix-suppression
+ passive-interface Loopback0
+ network 10.0.0.0 0.255.255.255 area 0
+R1#
++++ R1 with alias 'vty': executing command 'show ip ospf sham-links' +++
+show ip ospf sham-links
+R1#
+Could not learn <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfShamLinks'>
+Show Command: show ip ospf sham-links
+Parser Output is empty
++====================================================================================================================================================+
+| Commands for learning feature 'Ospf'                                                                                                               |
++====================================================================================================================================================+
+| - Parsed commands                                                                                                                                  |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspf'>                                                                                        |
+|   cmd: <class 'genie.libs.parser.iosxe.show_protocols.ShowIpProtocols'>, arguments: {'vrf':''}                                                     |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfMplsLdpInterface'>, arguments: {'interface':''}                                           |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfMplsTrafficEngLink'>                                                                      |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfDatabaseRouter'>                                                                          |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfDatabaseNetwork'>                                                                         |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfDatabaseExternal'>                                                                        |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfDatabaseSummary'>                                                                         |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfDatabaseOpaqueArea'>                                                                      |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfInterface'>, arguments: {'interface':''}                                                  |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfNeighborDetail'>, arguments: {'neighbor':''}                                              |
+|====================================================================================================================================================|
+| - Commands with empty output                                                                                                                       |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfVirtualLinks'>                                                                            |
+|   cmd: <class 'genie.libs.parser.ios.show_ospf.ShowIpOspfShamLinks'>                                                                               |
+|====================================================================================================================================================|

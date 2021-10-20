@@ -1,0 +1,443 @@
++++ R2 with alias 'vty': executing command 'show bgp all summary' +++
+show bgp all summary
+For address family: IPv4 Unicast
+BGP router identifier 10.0.0.2, local AS number 65000
+BGP table version is 1, main routing table version 1
+6 network entries using 864 bytes of memory
+6 path entries using 504 bytes of memory
+1/0 BGP path/bestpath attribute entries using 160 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 1528 total bytes of memory
+BGP activity 17/11 prefixes, 17/11 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.0.0.5        4        65000       2       2        1    0    0 00:00:30        0
+10.0.0.6        4        65000       5       2        1    0    0 00:00:31        6
+R2#
++++ R2 with alias 'vty': executing command 'show ip bgp template peer-session' +++
+show ip bgp template peer-session
+Template:IBGP, index:1
+Local policies:0x81, Inherited polices:0x0
+Locally configured session commands: 
+ remote-as 65000
+ update-source Loopback0
+Inherited session commands: 
+
+R2#
++++ R2 with alias 'vty': executing command 'show ip bgp template peer-policy' +++
+show ip bgp template peer-policy
+No templates configured
+
+R2#
++++ R2 with alias 'vty': executing command 'show vrf detail | inc \(VRF' +++
+show vrf detail | inc \(VRF
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all cluster-ids' +++
+show bgp all cluster-ids
+Global cluster-id: 10.0.0.2 (configured: 0.0.0.0)
+BGP client-to-client reflection:         Configured    Used
+  all (inter-cluster and intra-cluster): ENABLED
+  intra-cluster:                         ENABLED       ENABLED
+
+List of cluster-ids:
+Cluster-id     #-neighbors C2C-rfl-CFG C2C-rfl-USE
+R2#
++++ R2 with alias 'vty': executing command 'show ip bgp all dampening parameters' +++
+show ip bgp all dampening parameters
+For address family: IPv4 Unicast
+
+% dampening not enabled for base
+
+For address family: IPv4 Multicast
+
+% dampening not enabled for base
+
+For address family: L2VPN E-VPN
+
+% dampening not enabled for base
+
+For address family: MVPNv4 Unicast
+
+% dampening not enabled for base
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors' +++
+show bgp all neighbors
+For address family: IPv4 Unicast
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+ Inherits from template IBGP for session parameters
+  BGP version 4, remote router ID 10.0.0.5
+  BGP state = Established, up for 00:00:32
+  Last read 00:00:32, last write 00:00:32, hold time is 180, keepalive interval is 60 seconds
+  Neighbor sessions:
+    1 active, is not multisession capable (disabled)
+  Neighbor capabilities:
+    Route refresh: advertised and received(new)
+    Four-octets ASN Capability: advertised and received
+    Address family IPv4 Unicast: advertised and received
+    Enhanced Refresh Capability: advertised and received
+    Multisession Capability: 
+    Stateful switchover support enabled: NO for session 1
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+    
+                         Sent       Rcvd
+    Opens:                  1          1
+    Notifications:          0          0
+    Updates:                0          0
+    Keepalives:             1          1
+    Route Refresh:          0          0
+    Total:                  2          2
+  Do log neighbor state changes (via global configuration)
+  Default minimum time between advertisement runs is 0 seconds
+
+  Address tracking is enabled, the RIB does have a route to 10.0.0.5
+  Route to peer address reachability Up: 1; Down: 0
+    Last notification 01:51:11
+  Connections established 4; dropped 3
+  Last reset 00:00:42, due to BGP Notification received of session 1, Administrative Reset
+  Interface associated: (none) (peering address NOT in same link)
+  Transport(tcp) path-mtu-discovery is enabled
+  Graceful-Restart is disabled
+  SSO is disabled
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 10.0.0.2, Local port: 179
+Foreign host: 10.0.0.5, Foreign port: 33002
+Connection tableid (VRF): 0
+Maximum output segment queue size: 50
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x663F13):
+Timer          Starts    Wakeups            Next
+Retrans             2          0             0x0
+TimeWait            0          0             0x0
+AckHold             2          1             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 1079622834  snduna: 1079622911  sndnxt: 1079622911
+irs: 2475061945  rcvnxt: 2475062022
+
+sndwnd:  16308  scale:      0  maxrcvwnd:  16384
+rcvwnd:  16308  scale:      0  delrcvwnd:     76
+
+SRTT: 234 ms, RTTO: 2984 ms, RTV: 2750 ms, KRTT: 0 ms
+minRTT: 2 ms, maxRTT: 1000 ms, ACK hold: 200 ms
+uptime: 32032 ms, Sent idletime: 31809 ms, Receive idletime: 32017 ms 
+Status Flags: passive open, gen tcbs
+Option Flags: nagle, path mtu capable
+IP Precedence value : 6
+
+Datagrams (max data segment is 1460 bytes):
+Rcvd: 5 (out of order: 0), with data: 2, total data bytes: 76
+Sent: 5 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 2, total data bytes: 76
+
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+TCP Semaphore      0xEEA9A71C  FREE 
+
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+ Inherits from template IBGP for session parameters
+  BGP version 4, remote router ID 10.0.0.6
+  BGP state = Established, up for 00:00:32
+  Last read 00:00:18, last write 00:00:32, hold time is 180, keepalive interval is 60 seconds
+  Neighbor sessions:
+    1 active, is not multisession capable (disabled)
+  Neighbor capabilities:
+    Route refresh: advertised and received(new)
+    Four-octets ASN Capability: advertised and received
+    Address family IPv4 Unicast: advertised and received
+    Enhanced Refresh Capability: advertised and received
+    Multisession Capability: 
+    Stateful switchover support enabled: NO for session 1
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+    
+                         Sent       Rcvd
+    Opens:                  1          1
+    Notifications:          0          0
+    Updates:                0          2
+    Keepalives:             1          2
+    Route Refresh:          0          0
+    Total:                  2          5
+  Do log neighbor state changes (via global configuration)
+  Default minimum time between advertisement runs is 0 seconds
+
+  Address tracking is enabled, the RIB does have a route to 10.0.0.6
+  Route to peer address reachability Up: 1; Down: 0
+    Last notification 01:51:11
+  Connections established 4; dropped 3
+  Last reset 00:00:42, due to BGP Notification received of session 1, Administrative Reset
+  Interface associated: (none) (peering address NOT in same link)
+  Transport(tcp) path-mtu-discovery is enabled
+  Graceful-Restart is disabled
+  SSO is disabled
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 255
+Local host: 10.0.0.2, Local port: 179
+Foreign host: 10.0.0.6, Foreign port: 13796
+Connection tableid (VRF): 0
+Maximum output segment queue size: 50
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x663F14):
+Timer          Starts    Wakeups            Next
+Retrans             3          0             0x0
+TimeWait            0          0             0x0
+AckHold             4          2             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            0          0             0x0
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 1202682861  snduna: 1202682938  sndnxt: 1202682938
+irs: 3735733032  rcvnxt: 3735733232
+
+sndwnd:  16308  scale:      0  maxrcvwnd:  16384
+rcvwnd:  16185  scale:      0  delrcvwnd:    199
+
+SRTT: 330 ms, RTTO: 3159 ms, RTV: 2829 ms, KRTT: 0 ms
+minRTT: 1 ms, maxRTT: 1000 ms, ACK hold: 200 ms
+uptime: 32871 ms, Sent idletime: 18695 ms, Receive idletime: 18896 ms 
+Status Flags: passive open, gen tcbs
+Option Flags: nagle, path mtu capable
+IP Precedence value : 6
+
+Datagrams (max data segment is 1460 bytes):
+Rcvd: 7 (out of order: 0), with data: 5, total data bytes: 199
+Sent: 7 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 2, total data bytes: 76
+
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+TCP Semaphore      0xEEA9A6AC  FREE 
+
+
+For address family: IPv4 Multicast
+
+For address family: L2VPN E-VPN
+
+For address family: MVPNv4 Unicast
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.5 policy' +++
+show bgp all neighbors 10.0.0.5 policy
+ Neighbor: 10.0.0.5, Address-Family: IPv4 Unicast
+ Locally configured policies:
+  route-reflector-client
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.6 policy' +++
+show bgp all neighbors 10.0.0.6 policy
+ Neighbor: 10.0.0.6, Address-Family: IPv4 Unicast
+ Locally configured policies:
+  route-reflector-client
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all' +++
+show bgp all
+For address family: IPv4 Unicast
+
+BGP table version is 1, local router ID is 10.0.0.2
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal, 
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter, 
+              x best-external, a additional-path, c RIB-compressed, 
+              t secondary path, 
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ * i  203.0.113.61/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.62/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.63/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.64/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.65/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.66/32  10.0.0.6                 0    100      0 ?
+
+For address family: IPv4 Multicast
+
+
+For address family: L2VPN E-VPN
+
+
+For address family: MVPNv4 Unicast
+
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all detail' +++
+show bgp all detail
+For address family: IPv4 Unicast
+
+BGP routing table entry for 203.0.113.61/32, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  Local, (Received from a RR-client)
+    10.0.0.6 (inaccessible) from 10.0.0.6 (10.0.0.6)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+BGP routing table entry for 203.0.113.62/32, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  Local, (Received from a RR-client)
+    10.0.0.6 (inaccessible) from 10.0.0.6 (10.0.0.6)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+BGP routing table entry for 203.0.113.63/32, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  Local, (Received from a RR-client)
+    10.0.0.6 (inaccessible) from 10.0.0.6 (10.0.0.6)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+BGP routing table entry for 203.0.113.64/32, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  Local, (Received from a RR-client)
+    10.0.0.6 (inaccessible) from 10.0.0.6 (10.0.0.6)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+BGP routing table entry for 203.0.113.65/32, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  Local, (Received from a RR-client)
+    10.0.0.6 (inaccessible) from 10.0.0.6 (10.0.0.6)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+BGP routing table entry for 203.0.113.66/32, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  Local, (Received from a RR-client)
+    10.0.0.6 (inaccessible) from 10.0.0.6 (10.0.0.6)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+
+For address family: IPv4 Multicast
+
+
+For address family: L2VPN E-VPN
+
+
+For address family: MVPNv4 Unicast
+
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.5 advertised-routes' +++
+show bgp all neighbors 10.0.0.5 advertised-routes
+For address family: IPv4 Unicast
+
+Total number of prefixes 0 
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors | i BGP neighbor' +++
+show bgp all neighbors | i BGP neighbor
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.6 advertised-routes' +++
+show bgp all neighbors 10.0.0.6 advertised-routes
+For address family: IPv4 Unicast
+
+Total number of prefixes 0 
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors | i BGP neighbor' +++
+show bgp all neighbors | i BGP neighbor
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.5 routes' +++
+show bgp all neighbors 10.0.0.5 routes
+For address family: IPv4 Unicast
+
+Total number of prefixes 0 
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors | i BGP neighbor' +++
+show bgp all neighbors | i BGP neighbor
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.6 routes' +++
+show bgp all neighbors 10.0.0.6 routes
+For address family: IPv4 Unicast
+BGP table version is 1, local router ID is 10.0.0.2
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal, 
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter, 
+              x best-external, a additional-path, c RIB-compressed, 
+              t secondary path, 
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ * i  203.0.113.61/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.62/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.63/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.64/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.65/32  10.0.0.6                 0    100      0 ?
+ * i  203.0.113.66/32  10.0.0.6                 0    100      0 ?
+
+Total number of prefixes 6 
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors | i BGP neighbor' +++
+show bgp all neighbors | i BGP neighbor
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.5 received-routes' +++
+show bgp all neighbors 10.0.0.5 received-routes
+For address family: IPv4 Unicast
+% Inbound soft reconfiguration not enabled on 10.0.0.5
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors | i BGP neighbor' +++
+show bgp all neighbors | i BGP neighbor
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors 10.0.0.6 received-routes' +++
+show bgp all neighbors 10.0.0.6 received-routes
+For address family: IPv4 Unicast
+% Inbound soft reconfiguration not enabled on 10.0.0.6
+R2#
++++ R2 with alias 'vty': executing command 'show bgp all neighbors | i BGP neighbor' +++
+show bgp all neighbors | i BGP neighbor
+BGP neighbor is 10.0.0.5,  remote AS 65000, internal link
+BGP neighbor is 10.0.0.6,  remote AS 65000, internal link
+R2#
+Could not learn <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsReceivedRoutes'>
+Show Command: show bgp all neighbors 10.0.0.6 received-routes
+Parser Output is empty
++====================================================================================================================================================+
+| Commands for learning feature 'Bgp'                                                                                                                |
++====================================================================================================================================================+
+| - Parsed commands                                                                                                                                  |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllSummary'>, arguments: {'address_family':'','vrf':''}                                       |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowIpBgpTemplatePeerSession'>                                                                       |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllClusterIds'>                                                                               |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighbors'>, arguments: {'address_family':'','neighbor':''}                                |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAll'>, arguments: {'address_family':''}                                                       |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllDetail'>, arguments: {'address_family':'','vrf':''}                                        |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsRoutes'>, arguments: {'address_family':'','neighbor':'10.0.0.6'}                  |
+|====================================================================================================================================================|
+| - Commands with empty output                                                                                                                       |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowIpBgpTemplatePeerPolicy'>                                                                        |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowIpBgpAllDampeningParameters'>                                                                    |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsPolicy'>, arguments: {'neighbor':'10.0.0.5'}                                      |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsPolicy'>, arguments: {'neighbor':'10.0.0.6'}                                      |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsAdvertisedRoutes'>, arguments: {'address_family':'','neighbor':'10.0.0.5'}        |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsAdvertisedRoutes'>, arguments: {'address_family':'','neighbor':'10.0.0.6'}        |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsRoutes'>, arguments: {'address_family':'','neighbor':'10.0.0.5'}                  |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsReceivedRoutes'>, arguments: {'address_family':'','neighbor':'10.0.0.5'}          |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighborsReceivedRoutes'>, arguments: {'address_family':'','neighbor':'10.0.0.6'}          |
+|====================================================================================================================================================|

@@ -1,0 +1,63 @@
++++ R3 with alias 'vty': executing command 'show bgp all summary' +++
+show bgp all summary
+% BGP not active
+
+R3#
++++ R3 with alias 'vty': executing command 'show ip bgp template peer-session' +++
+show ip bgp template peer-session
+No templates configured
+
+R3#
++++ R3 with alias 'vty': executing command 'show ip bgp template peer-policy' +++
+show ip bgp template peer-policy
+No templates configured
+
+R3#
++++ R3 with alias 'vty': executing command 'show vrf detail | inc \(VRF' +++
+show vrf detail | inc \(VRF
+R3#
++++ R3 with alias 'vty': executing command 'show bgp all cluster-ids' +++
+show bgp all cluster-ids
+% BGP not active
+
+R3#
++++ R3 with alias 'vty': executing command 'show ip bgp all dampening parameters' +++
+show ip bgp all dampening parameters
+% BGP not active
+
+R3#
++++ R3 with alias 'vty': executing command 'show bgp all neighbors' +++
+show bgp all neighbors
+% BGP not active
+
+R3#
++++ R3 with alias 'vty': executing command 'show bgp all' +++
+show bgp all
+% BGP not active
+
+R3#
++++ R3 with alias 'vty': executing command 'show bgp all detail' +++
+show bgp all detail
+% BGP not active
+
+R3#
+s.parser.ios.show_bgp.ShowBgpAll'>
+Show Command: show bgp all
+Parser Output is empty
+Could not learn <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllDetail'>
+Show Command: show bgp all detail
+Parser Output is empty
++====================================================================================================================================================+
+| Commands for learning feature 'Bgp'                                                                                                                |
++====================================================================================================================================================+
+| - Commands with empty output                                                                                                                       |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllSummary'>, arguments: {'address_family':'','vrf':''}                                       |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowIpBgpTemplatePeerSession'>                                                                       |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowIpBgpTemplatePeerPolicy'>                                                                        |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllClusterIds'>                                                                               |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowIpBgpAllDampeningParameters'>                                                                    |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllNeighbors'>, arguments: {'address_family':'','neighbor':''}                                |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAll'>, arguments: {'address_family':''}                                                       |
+|   cmd: <class 'genie.libs.parser.ios.show_bgp.ShowBgpAllDetail'>, arguments: {'address_family':'','vrf':''}                                        |
+|====================================================================================================================================================|
