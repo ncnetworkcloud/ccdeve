@@ -17,6 +17,7 @@ class BGPTestcase(aetest.Testcase):
         # Store the testbed object and an empty data dict for BGP data
         self.testbed = testbed
         self.data = {}
+        self.orig = {}
 
         # Store the logger and set logging level to augment aetest logging
         self.logger = logging.getLogger(__name__)
@@ -32,11 +33,13 @@ class BGPTestcase(aetest.Testcase):
         # Loop over devices and collect BGP summary data
         for name, device in nonspines.items():
             self.logger.info(name)
-            parsed = device.parse("show bgp ipv4 unicast summary")
+
+            # Retain the original "parsed" data for comparative purposes
+            self.orig[name] = device.parse("show bgp ipv4 unicast summary")
 
             # Modify the structure; "neighbor", "local_asn", and "type" top keys
-            self.data[name] = parsed["vrf"]["default"]
-            self.data[name]["local_asn"] = parsed["bgp_id"]
+            self.data[name] = self.orig[name]["vrf"]["default"]
+            self.data[name]["local_asn"] = self.orig[name]["bgp_id"]
             self.data[name]["type"] = device.type
 
             # Remove the unnecessary intermediate AFI/SAFI to simplify tests
@@ -98,6 +101,27 @@ class BGPTestcase(aetest.Testcase):
         # Each dict value should be a set with 1 value each
         for pfx_set in pfx_dict.values():
             assert len(pfx_set) == 1
+
+    @aetest.test
+    def check_empty_queues(self):
+        """Ensure each router has no queued messages using Dq() feature"""
+
+        # Loop over original "parsed" data (unmodified Genie output)
+        for name, orig in self.orig.items():
+            self.logger.info(name)
+
+            # Query the for all input_queue values and convert to set
+            inq_set = set(orig.q.get_values("input_queue"))
+
+            # Set must have one element which is equal to 0 (no updates in InQ)
+            assert len(inq_set) == 1
+            assert inq_set.pop() == 0
+
+            # Query for all output_queue values greater than 0
+            outq_dq = orig.q.value_operator("output_queue", ">", 0)
+
+            # Nothing should be returned; a positive int means updates in OutQ
+            assert len(outq_dq) == 0
 
     @aetest.cleanup
     def cleanup(self):

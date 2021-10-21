@@ -13,8 +13,7 @@ class LeafSpineCommonSetup(aetest.CommonSetup):
     def connect(self, testbed):
         """Connect to devices in testbed"""
 
-        self.testbed = testbed
-        self.testbed.connect(log_stdout=False)
+        testbed.connect(log_stdout=False)
 
 
 class LeafSpineCommonCleanup(aetest.CommonCleanup):
@@ -22,5 +21,4 @@ class LeafSpineCommonCleanup(aetest.CommonCleanup):
     def disconnect(self, testbed):
         """Disonnect from devices in testbed"""
 
-        self.testbed = testbed
-        self.testbed.disconnect(log_stdout=False)
+        testbed.disconnect(log_stdout=False)
